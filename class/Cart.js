@@ -37,4 +37,24 @@ class Cart {
         }
         return total;
     }
+
+    render() {
+        let table = document.createElement('table');
+        table.classList.add(this.cartClass);
+        for (let key in this.items) {
+            let goods = this.items[key];
+            //делаю строку
+            const tr = document.createElement('tr');
+            //делаю удаление товара с корзины
+            let td = document.createElement('td');
+            let button = document.createElement('button');
+            button.classList.add(this.deleteClass);
+            button.classList.add('button-primary');
+            button.innerHTML=  "x";
+            button.setAttribute('data-articul', key);
+            td.append(button);
+            tr.append(td);
+            //делаю картинку
+        }
+    }
 }
