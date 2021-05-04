@@ -59,6 +59,16 @@ class Cart {
             let img = document.createElement('img');
             img.src = goods.image;
             td.append(img);
+            tr.append(td);
+            //делаю название
+            td = document.createElement('td');
+            //создаю заголовок
+            let  h4 = document.createElement('h4');
+            h4.innerHTML = goods.name;
+            td.append(h4);
+            tr.append(td);
+            //делаю минус товара
+
         }
         //делаю full total для суммы товаров
         let tr = document.createElement('tr');
