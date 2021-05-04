@@ -76,7 +76,15 @@ class Cart {
             button.setAttribute('data-articul', key);
             td.append(button);
             tr.append(td);
-
+            //делаю плюс товара аналогично минусу
+            td = document.createElement('td');
+            button = document.createElement('button');
+            button.classList.add(this.plusClass);//добавил класс через конструктор
+            button.classList.add('button-primary');//добавил класс mustard ui
+            button.innerHTML = '+';
+            button.setAttribute('data-articul', key);
+            td.append(button);
+            tr.append(td);
         }
         //делаю full total для суммы товаров
         let tr = document.createElement('tr');
