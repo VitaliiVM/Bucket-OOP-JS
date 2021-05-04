@@ -68,6 +68,14 @@ class Cart {
             td.append(h4);
             tr.append(td);
             //делаю минус товара
+            td = document.createElement('td');
+            button = document.createElement('button');
+            button.classList.add(this.minusClass);//добавил класс через конструктор
+            button.classList.add('button-primary');//добавил класс mustard ui
+            button.innerHTML = '-';
+            button.setAttribute('data-articul', key);
+            td.append(button);
+            tr.append(td);
 
         }
         //делаю full total для суммы товаров
