@@ -49,7 +49,8 @@ class Cart {
             let td = document.createElement('td');
             let button = document.createElement('button');//создал кнопку
             button.classList.add(this.deleteClass);//добавил класс
-            button.classList.add('button-primary');//добавил для визуального оформления класс mustard ui
+            button.classList.add('button-primary');//добавил для визуального оформления
+            // класс mustard ui
             button.innerHTML=  "x";//рисую крестик на кнопке
             button.setAttribute('data-articul', key);//установил аттрибуты для кнопки
             td.append(button);
