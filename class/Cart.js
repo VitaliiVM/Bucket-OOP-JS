@@ -39,22 +39,36 @@ class Cart {
     }
 
     render() {
-        let table = document.createElement('table');
-        table.classList.add(this.cartClass);
-        for (let key in this.items) {
-            let goods = this.items[key];
+        let table = document.createElement('table');//создал таблицу
+        table.classList.add(this.cartClass);//добавил класс
+        for (let key in this.items) {//прошелся циклом по массиву товаров
+            let goods = this.items[key];//промежуточная переменная
             //делаю строку
             const tr = document.createElement('tr');
             //делаю удаление товара с корзины
             let td = document.createElement('td');
-            let button = document.createElement('button');
-            button.classList.add(this.deleteClass);
-            button.classList.add('button-primary');
-            button.innerHTML=  "x";
-            button.setAttribute('data-articul', key);
+            let button = document.createElement('button');//создал кнопку
+            button.classList.add(this.deleteClass);//добавил класс
+            button.classList.add('button-primary');//добавил для визуального оформления класс mustard ui
+            button.innerHTML=  "x";//рисую крестик на кнопке
+            button.setAttribute('data-articul', key);//установил аттрибуты для кнопки
             td.append(button);
             tr.append(td);
             //делаю картинку
+            td = document.createElement('td');
+            let img = document.createElement('img');
+            img.src = goods.image;
+            td.append(img);
         }
+        //делаю full total для суммы товаров
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        td.setAttribute('colspan',7);//merge 7 td
+        td.style.textAlign = 'right';//выровнял по правому краю
+        td.innerHTML = '<span class="total">Total:</span>' + this.getTotal()
+        + ' ' + this.currency;//вставляю текст и добавляю метод подсчета getToatal и валюту
+        tr.append(td);
+        table.append(tr);
+        return table;
     }
 }
