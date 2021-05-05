@@ -16,14 +16,14 @@ class Cart {
         this.cartClass = cartClass;
         this.currency = 'UAH';
     }
-
     goodsPlus(art) {
         this.items[art]['count']++;
     }
     goodsMinus(art) {
-        if (this.items[art]['count'] - 1 === 0) {
+        if (this.items[art]['count'] - 1 == 0) {
             this.goodsDelete(art);
-        } else {
+        }
+        else {
             this.items[art]['count']--;
         }
     }
@@ -37,65 +37,76 @@ class Cart {
         }
         return total;
     }
-
     render() {
-        let table = document.createElement('table');//создал таблицу
-        table.classList.add(this.cartClass);//добавил класс
-        for (let key in this.items) {//прошелся циклом по массиву товаров
-            let goods = this.items[key];//промежуточная переменная
-            //делаю строку
+
+        let table = document.createElement('table'); // create table
+        table.classList.add(this.cartClass); // add class from constructor
+
+        for (let key in this.items) {
+            let goods = this.items[key];
+            // делаем строку
             const tr = document.createElement('tr');
-            //делаю удаление товара с корзины
+            // делаем кнопку удалить
             let td = document.createElement('td');
-            let button = document.createElement('button');//создал кнопку
-            button.classList.add(this.deleteClass);//добавил класс
-            button.classList.add('button-primary');//добавил для визуального оформления
-            // класс mustard ui
-            button.innerHTML=  "x";//рисую крестик на кнопке
-            button.setAttribute('data-articul', key);//установил аттрибуты для кнопки
+            let button = document.createElement('button');
+            button.classList.add(this.deleteClass);
+            button.classList.add('button-primary');
+            button.innerHTML = "x";
+            button.setAttribute('data-articul', key);
             td.append(button);
             tr.append(td);
-            //делаю картинку
+            // делаем картинку
             td = document.createElement('td');
             let img = document.createElement('img');
             img.src = goods.image;
             td.append(img);
             tr.append(td);
-            //делаю название
+            // // делаем название
             td = document.createElement('td');
-            //создаю заголовок
-            let  h4 = document.createElement('h4');
+            let h4 = document.createElement('h4');
             h4.innerHTML = goods.name;
             td.append(h4);
             tr.append(td);
-            //делаю минус товара
+            // делаем минус
             td = document.createElement('td');
             button = document.createElement('button');
-            button.classList.add(this.minusClass);//добавил класс через конструктор
-            button.classList.add('button-primary');//добавил класс mustard ui
-            button.innerHTML = '-';
+            button.classList.add(this.minusClass);
+            button.classList.add('button-primary');
+            button.innerHTML = "-";
             button.setAttribute('data-articul', key);
             td.append(button);
             tr.append(td);
-            //делаю плюс товара аналогично минусу
+            // делаем количество
+            td = document.createElement('td');
+            let span = document.createElement('span');
+            span.innerHTML = goods.count;
+            td.append(span);
+            tr.append(td);
+            // делаем плюс
             td = document.createElement('td');
             button = document.createElement('button');
-            button.classList.add(this.plusClass);//добавил класс через конструктор
-            button.classList.add('button-primary');//добавил класс mustard ui
-            button.innerHTML = '+';
+            button.classList.add(this.plusClass);
+            button.classList.add('button-primary');
+            button.innerHTML = "+";
             button.setAttribute('data-articul', key);
             td.append(button);
             tr.append(td);
+            // делаем total
+            td = document.createElement('td');
+            span = document.createElement('span');
+            span.innerHTML = goods.count * goods.price + ' ' + this.currency;
+            td.append(span);
+            tr.append(td);
+            table.append(tr); //!!! add tr to table
         }
-        //делаю full total для суммы товаров
+        // делаем full total
         let tr = document.createElement('tr');
         let td = document.createElement('td');
-        td.setAttribute('colspan',7);//merge 7 td
-        td.style.textAlign = 'right';//выровнял по правому краю
-        td.innerHTML = '<span class="total">Total:</span>' + this.getTotal()
-        + ' ' + this.currency;//вставляю текст и добавляю метод подсчета getToatal и валюту
+        td.setAttribute('colspan', 7); // merge 7 td
+        td.style.textAlign = 'right';
+        td.innerHTML = '<span class="total">Total: </span> ' + this.getTotal() + ' ' + this.currency;
         tr.append(td);
-        table.append(tr);
+        table.append(tr);// to table
         return table;
     }
 }
